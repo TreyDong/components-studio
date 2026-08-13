@@ -207,10 +207,10 @@ function buildDocument(): ComponentsDocumentV1 {
   return {
     kind: "components-studio/document",
     formatVersion: 1,
-    documentId: "c1c1c1c1-c1c1-4c1c-8c1c-c1c1c1c1c1c1",
+    documentId: "c1c1c1c1-c1c1-4c1c-8c1c-c1c1c1c1c1c1" as import("@ocs/contracts").DocumentId,
     revision: 0,
-    createdAt: "2026-08-13T09:00:00.000Z",
-    updatedAt: "2026-08-13T09:00:00.000Z",
+    createdAt: "2026-08-13T09:00:00.000Z" as import("@ocs/contracts").UtcIsoDateTime,
+    updatedAt: "2026-08-13T09:00:00.000Z" as import("@ocs/contracts").UtcIsoDateTime,
     rootId,
     nodes,
     dataSources: {},
