@@ -20,6 +20,11 @@ export interface CalendarProps {
   readonly showAdjacentDays: boolean;
   /** 标题前缀，只用于编辑器识别；null 不展示。 */
   readonly label: string;
+  /**
+   * 强调色（#RRGGBB/#RRGGBBAA），覆盖 --ocs-accent token。
+   * 可选：旧文档无此字段时按 null 处理；向后兼容（非 required）。
+   */
+  readonly accent: string | null;
 }
 
 export const calendarPropsSchema: JsonObjectSchema = {
@@ -31,6 +36,12 @@ export const calendarPropsSchema: JsonObjectSchema = {
     showToday: { type: "boolean" },
     showAdjacentDays: { type: "boolean" },
     label: { type: "string", maxLength: 120 },
+    accent: {
+      oneOf: [
+        { type: "string", pattern: "^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$", maxLength: 9 },
+        { type: "null" },
+      ],
+    },
   },
   required: [
     "locale",
@@ -51,6 +62,7 @@ export function calendarDefaultProps(): CalendarProps {
     showToday: true,
     showAdjacentDays: false,
     label: "",
+    accent: null,
   };
 }
 
@@ -60,10 +72,15 @@ export function validateCalendarProps(input: unknown): ValidationResult<Calendar
   if (issues.length > 0) {
     return { ok: false, issues };
   }
-  const value = input as CalendarProps;
-  if (typeof value.locale === "string" && value.locale !== "system") {
+  const raw = input as Record<string, unknown>;
+  // 向后兼容：旧文档缺少 accent 字段时按 null 处理。
+  const normalized: CalendarProps = {
+    ...(input as CalendarProps),
+    accent: typeof raw.accent === "string" ? raw.accent : null,
+  };
+  if (typeof normalized.locale === "string" && normalized.locale !== "system") {
     try {
-      const resolved = Intl.DateTimeFormat(value.locale).resolvedOptions().locale;
+      const resolved = Intl.DateTimeFormat(normalized.locale).resolvedOptions().locale;
       if (!resolved) {
         issues.push({
           pointer: "$/locale",
@@ -84,7 +101,7 @@ export function validateCalendarProps(input: unknown): ValidationResult<Calendar
   if (issues.length > 0) {
     return { ok: false, issues };
   }
-  return { ok: true, value, warnings: [] };
+  return { ok: true, value: normalized, warnings: [] };
 }
 
 // ---------------------------------------------------------------------------

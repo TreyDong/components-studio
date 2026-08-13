@@ -8,6 +8,7 @@
  */
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import type { ComponentRendererProps } from "../../registry/definition";
 import {
   buildMonthGrid,
@@ -45,7 +46,12 @@ export function TimeCalendarRenderer(props: ComponentRendererProps<CalendarProps
     view.year === today.getFullYear() && view.month === today.getMonth();
 
   return (
-    <div className="ocs-calendar" data-view-year={view.year} data-view-month={view.month}>
+    <div
+      className="ocs-calendar"
+      data-view-year={view.year}
+      data-view-month={view.month}
+      style={p.accent ? ({ "--ocs-cal-accent": p.accent } as CSSProperties) : undefined}
+    >
       <div className="ocs-calendar-header">
         <button
           type="button"

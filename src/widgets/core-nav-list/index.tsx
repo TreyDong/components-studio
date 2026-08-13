@@ -15,6 +15,7 @@ import type { JsonObjectSchema } from "../../schema/validator";
 import type { ValidationIssue, ValidationResult } from "@ocs/contracts";
 import { validateAgainstSchema } from "../../schema/validator";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import type { ComponentInspectorProps, ComponentRendererProps } from "../../registry/definition";
 
 export interface NavListItem {
@@ -28,6 +29,10 @@ export interface NavListProps {
   readonly items: readonly NavListItem[];
   readonly showIcons: boolean;
   readonly emptyText: string;
+  /** 彩虹渐变背景（迁移自旧版 enableRainbowBackground）。 */
+  readonly rainbowBackground: boolean;
+  /** 列表项背景色（#RRGGBB/#RRGGBBAA），空串 = 无（迁移自旧版 navItemBackgroundColor）。 */
+  readonly itemBackground: string;
 }
 
 export const navListManifest: ComponentManifest = {
@@ -66,8 +71,15 @@ export const navListPropsSchema: JsonObjectSchema = {
     },
     showIcons: { type: "boolean" },
     emptyText: { type: "string", maxLength: 300 },
+    rainbowBackground: { type: "boolean" },
+    itemBackground: {
+      oneOf: [
+        { type: "string", pattern: "^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$", maxLength: 9 },
+        { type: "string", maxLength: 0 },
+      ],
+    },
   },
-  required: ["title", "items", "showIcons", "emptyText"],
+  required: ["title", "items", "showIcons", "emptyText", "rainbowBackground", "itemBackground"],
   additionalProperties: false,
 };
 
@@ -77,6 +89,8 @@ export function navListDefaultProps(): NavListProps {
     items: [],
     showIcons: true,
     emptyText: "暂无导航项",
+    rainbowBackground: false,
+    itemBackground: "",
   };
 }
 
@@ -116,8 +130,14 @@ export function NavListRenderer(props: ComponentRendererProps<NavListProps>) {
     return <div className="ocs-nav-empty">{p.emptyText}</div>;
   }
 
+  const containerClass = [
+    "ocs-nav-list",
+    p.rainbowBackground ? "ocs-nav-rainbow" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <nav className="ocs-nav-list" aria-label={p.title || "导航列表"}>
+    <nav className={containerClass} aria-label={p.title || "导航列表"}>
       {p.title && <div className="ocs-nav-title">{p.title}</div>}
       {errorLabel && (
         <div className="ocs-nav-error" role="alert">
@@ -130,6 +150,11 @@ export function NavListRenderer(props: ComponentRendererProps<NavListProps>) {
             <button
               type="button"
               className="ocs-nav-item-btn"
+              style={
+                p.itemBackground
+                  ? ({ "--ocs-nav-item-bg": p.itemBackground } as CSSProperties)
+                  : undefined
+              }
               onClick={() => void open(item)}
               disabled={openLabel === item.label}
               aria-busy={openLabel === item.label || undefined}
@@ -178,6 +203,27 @@ function NavListInspector(props: ComponentInspectorProps<NavListProps>) {
           type="checkbox"
           checked={value.showIcons}
           onChange={(event) => commit({ ...value, showIcons: event.target.checked }, "切换图标")}
+        />
+      </label>
+      <label className="ocs-field ocs-field-toggle">
+        <span>彩虹背景</span>
+        <input
+          type="checkbox"
+          checked={value.rainbowBackground}
+          onChange={(event) =>
+            commit({ ...value, rainbowBackground: event.target.checked }, "切换彩虹背景")
+          }
+        />
+      </label>
+      <label className="ocs-field">
+        <span>列表项背景色（#RRGGBB）</span>
+        <input
+          type="text"
+          value={value.itemBackground}
+          placeholder="#RRGGBB"
+          onChange={(event) =>
+            commit({ ...value, itemBackground: event.target.value }, "修改列表项背景色")
+          }
         />
       </label>
       <label className="ocs-field">

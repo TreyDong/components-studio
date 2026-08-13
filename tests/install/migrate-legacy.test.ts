@@ -9,7 +9,7 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
-import { LegacyComponents25Importer } from "../../src/document/legacy-importer";
+import { LegacyComponents25Importer, distributeBasis } from "../../src/document/legacy-importer";
 import { DocumentCodec } from "../../src/document/codec";
 import { ComponentRegistryImpl } from "../../src/registry/ComponentRegistry";
 import { legacyComponents25Definition } from "../../src/widgets/legacy-components-2-5";
@@ -47,7 +47,9 @@ function navListNodeFromLegacy(
   legacyNode: JsonObject,
   _documentId: string,
 ): ComponentNodeV1 | null {
-  const data = legacyNode.data as { settings?: { menuItems?: unknown } } | undefined;
+  const data = legacyNode.data as
+    | { settings?: Record<string, unknown> }
+    | undefined;
   const menuItems = data?.settings?.menuItems;
   if (!Array.isArray(menuItems)) return null;
   const items = menuItems
@@ -63,6 +65,16 @@ function navListNodeFromLegacy(
   if (items.length === 0) return null;
 
   const root = minimalDocument().nodes[ROOT_ID]!;
+  const settings = data?.settings;
+  const rainbowBackground = settings?.enableRainbowBackground === true;
+  const rawItemBg =
+    settings && typeof settings.navItemBackgroundColor === "string"
+      ? settings.navItemBackgroundColor
+      : "";
+  // 只接受 #RRGGBB/#RRGGBBAA；旧值如 "transparent" 不迁移。
+  const itemBackground = /^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/.test(rawItemBg)
+    ? rawItemBg
+    : "";
   return {
     ...root,
     id: "6d5d6d6d-6d6d-4d6d-8d6d-6d6d6d6d6d6d" as ComponentId,
@@ -72,6 +84,8 @@ function navListNodeFromLegacy(
       items,
       showIcons: true,
       emptyText: "暂无导航项",
+      rainbowBackground,
+      itemBackground,
     },
     slots: {},
   } as ComponentNodeV1;
@@ -120,40 +134,105 @@ describe("legacy 迁移", () => {
       };
     }
 
-    if (navNode) {
+    // 从 legacy custom 的 settings 生成带强调色的 time.calendar（迷你日历迁移）。
+    let calendarNode: ComponentNodeV1 | null = null;
+    for (const node of Object.values(document.nodes)) {
+      if (node.type === "legacy.components-2-5") {
+        const legacyNode = (node.props as { legacyNode: JsonObject }).legacyNode;
+        const settings = (legacyNode.data as { settings?: Record<string, unknown> } | undefined)
+          ?.settings;
+        // 仅当存在日历特征配置时才生成 time.calendar（避免给导航类组件误加）。
+        const hasCalendarConfig =
+          settings !== undefined &&
+          (typeof settings.accentColor === "string" ||
+            typeof settings.imageFilePath === "string" ||
+            typeof settings.imageUrl === "string" ||
+            typeof settings.backgroundBlur === "number");
+        const accent =
+          settings && typeof settings.accentColor === "string" &&
+          /^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/.test(settings.accentColor)
+            ? settings.accentColor
+            : null;
+        if (hasCalendarConfig) {
+          const root = minimalDocument().nodes[ROOT_ID]!;
+          calendarNode = {
+            ...root,
+            id: "7a7a7a7a-7a7a-4a7a-8a7a-7a7a7a7a7a7a" as ComponentId,
+            type: "time.calendar" as ComponentNodeV1["type"],
+            props: {
+              locale: "system",
+              firstDayOfWeek: 1,
+              showWeekNumbers: false,
+              showToday: true,
+              showAdjacentDays: true,
+              label: "迷你日历",
+              accent,
+            },
+            slots: {},
+          } as ComponentNodeV1;
+        }
+        break;
+      }
+    }
+
+    // columns 模式：追加节点后重新均分基点（总和严格 10000）。
+    const rebalanceColumns = (root: ComponentNodeV1): ComponentNodeV1 => {
+      if (root.props.mode !== "columns") return root;
+      const children = root.slots.children ?? [];
+      if (children.length === 0) return root;
+      const basis = distributeBasis(children.map(() => 1));
+      return {
+        ...root,
+        slots: {
+          children: children.map((c, i) => ({
+            ...c,
+            placement: {
+              ...c.placement,
+              column: { ...c.placement.column, basisBp: basis[i]! },
+            },
+          })),
+        },
+      };
+    };
+
+    const extraNodes: ComponentNodeV1[] = [];
+    if (navNode) extraNodes.push(navNode);
+    if (calendarNode) extraNodes.push(calendarNode);
+    for (const extra of extraNodes) {
       const root = document.nodes[document.rootId]!;
+      const rootIdKey = document.rootId;
+      const nextRoot = {
+        ...root,
+        slots: {
+          children: [
+            ...(root.slots.children ?? []),
+            {
+              nodeId: extra.id,
+              placement: {
+                tab: { title: null, icon: null, disabled: false },
+                column: { basisBp: 10000, grow: 0, shrink: 1, minWidthPx: 0, maxWidthPx: null },
+                grid: {
+                  compact: { x: 0, y: 0, w: 4, h: 6, minW: 1, maxW: null, minH: 1, maxH: null },
+                  regular: { x: 0, y: 0, w: 6, h: 6, minW: 1, maxW: null, minH: 1, maxH: null },
+                  wide: { x: 0, y: 0, w: 4, h: 6, minW: 1, maxW: null, minH: 1, maxH: null },
+                },
+                extensions: {},
+              },
+            },
+          ],
+        },
+      };
       document.nodes = {
         ...document.nodes,
-        [navNode.id]: navNode,
-        [document.rootId]: {
-          ...root,
-          slots: {
-            children: [
-              ...(root.slots.children ?? []),
-              {
-                nodeId: navNode.id,
-                placement: {
-                  tab: { title: null, icon: null, disabled: false },
-                  column: { basisBp: 10000, grow: 0, shrink: 1, minWidthPx: 0, maxWidthPx: null },
-                  grid: {
-                    compact: { x: 0, y: 0, w: 4, h: 6, minW: 1, maxW: null, minH: 1, maxH: null },
-                    regular: { x: 0, y: 0, w: 6, h: 6, minW: 1, maxW: null, minH: 1, maxH: null },
-                    wide: { x: 0, y: 0, w: 4, h: 6, minW: 1, maxW: null, minH: 1, maxH: null },
-                  },
-                  extensions: {},
-                },
-              },
-            ],
-          },
-        },
+        [extra.id]: extra,
+        [rootIdKey]: rebalanceColumns(nextRoot),
       };
     }
 
     // 全量 Codec 校验（含新组件）
     const validated = codec.validate(document);
-    expect(validated.ok).toBe(true);
+    expect(validated.ok, `校验失败: ${JSON.stringify(validated.ok ? [] : validated.issues.slice(0, 8))}`).toBe(true);
     if (!validated.ok) {
-      console.error(validated.issues.slice(0, 5));
       return;
     }
 

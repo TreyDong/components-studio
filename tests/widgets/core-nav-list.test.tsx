@@ -163,6 +163,38 @@ describe("NavListRenderer", () => {
     expect(container.querySelector(".ocs-nav-error")?.textContent).toContain("主页");
   });
 
+  it("rainbowBackground 渲染彩虹类名", () => {
+    const { container } = renderNav({
+      props: { ...navListDefaultProps(), items: ITEMS, rainbowBackground: true },
+    });
+    expect(container.querySelector(".ocs-nav-list.ocs-nav-rainbow")).not.toBeNull();
+  });
+
+  it("默认无彩虹类名", () => {
+    const { container } = renderNav();
+    expect(container.querySelector(".ocs-nav-list")?.className).not.toContain("ocs-nav-rainbow");
+  });
+
+  it("itemBackground 应用到按钮样式", () => {
+    const { container } = renderNav({
+      props: {
+        ...navListDefaultProps(),
+        items: ITEMS,
+        itemBackground: "#ff6b6b",
+      },
+    });
+    const btn = container.querySelector(".ocs-nav-item-btn") as HTMLElement;
+    expect(btn.style.getPropertyValue("--ocs-nav-item-bg")).toBe("#ff6b6b");
+  });
+
+  it("非法 itemBackground 校验失败", () => {
+    const r = validateNavListProps({
+      ...navListDefaultProps(),
+      itemBackground: "red",
+    });
+    expect(r.ok).toBe(false);
+  });
+
   it("组件可注册且声明 workspace:navigate", () => {
     expect(coreNavListDefinition.manifest.type).toBe("core.nav-list");
     expect(coreNavListDefinition.manifest.declaredCapabilities).toContain("workspace:navigate");

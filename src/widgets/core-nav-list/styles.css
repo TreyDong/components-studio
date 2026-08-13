@@ -48,6 +48,48 @@
   background: var(--ocs-surface-hover);
 }
 
+/* 列表项自定义背景色（迁移自旧版 navItemBackgroundColor） */
+.ocs-component[data-component-type="core.nav-list"] .ocs-nav-item-btn {
+  background: var(--ocs-nav-item-bg, transparent);
+}
+
+/* 彩虹渐变背景（迁移自旧版 enableRainbowBackground） */
+.ocs-component[data-component-type="core.nav-list"] .ocs-nav-rainbow {
+  background: linear-gradient(
+    135deg,
+    #ff6b6b,
+    #ffd93d,
+    #6bcb77,
+    #4d96ff,
+    #b388ff,
+    #ff6b6b
+  );
+  background-size: 300% 300%;
+  border: none;
+}
+
+.ocs-component[data-component-type="core.nav-list"] .ocs-nav-rainbow .ocs-nav-title,
+.ocs-component[data-component-type="core.nav-list"] .ocs-nav-rainbow .ocs-nav-label,
+.ocs-component[data-component-type="core.nav-list"] .ocs-nav-rainbow .ocs-nav-icon {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.ocs-component[data-component-type="core.nav-list"] .ocs-nav-rainbow .ocs-nav-item-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ocs-component[data-component-type="core.nav-list"] .ocs-nav-rainbow {
+    animation: ocs-nav-rainbow-shift 12s linear infinite;
+  }
+}
+
+@keyframes ocs-nav-rainbow-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
 .ocs-component[data-component-type="core.nav-list"] .ocs-nav-item-btn:focus-visible {
   outline: 2px solid var(--ocs-accent);
   outline-offset: 1px;
