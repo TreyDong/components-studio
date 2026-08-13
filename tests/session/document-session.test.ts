@@ -5,8 +5,9 @@
 import { describe, expect, it } from "vitest";
 import type { ComponentsDocumentV1, DocumentSessionV1 } from "@ocs/contracts";
 import { ERROR_CODES } from "@ocs/contracts";
-import type { DocumentSession } from "../../src/session/DocumentSession";
+import { DocumentSession, toRuntimeDocumentPort } from "../../src/session/DocumentSession";
 import {
+  acquireDoc,
   createHarness,
   metadataCommand,
   makeDoc,
@@ -656,5 +657,29 @@ describe("未知节点保留（18.6 验收）", () => {
       expect(reloaded.value.getSnapshot().nodes[y.id]!.props).toEqual(y.props);
       expect(reloaded.value.getSnapshot().nodes[y.id]!.extensions).toEqual(y.extensions);
     }
+  });
+});
+
+describe("toRuntimeDocumentPort 快照引用稳定性", () => {
+  it("getSnapshot 在无变化时返回同一引用（useSyncExternalStore 契约）", async () => {
+    const h = await createHarness();
+    const session = await acquireDoc(h, makeDoc());
+    expect(session.ok).toBe(true);
+    if (!session.ok) return;
+    const port = toRuntimeDocumentPort(session.value);
+    const a = port.getSnapshot();
+    const b = port.getSnapshot();
+    expect(a).toBe(b);
+    // 变化后返回新引用
+    const r = session.value.dispatch(
+      metadataCommand("新标题"),
+      { label: "改标题", expectedSessionVersion: 0, mergeKey: null },
+    );
+    expect(r.ok).toBe(true);
+    const c = port.getSnapshot();
+    expect(c).not.toBe(a);
+    expect(c.metadata.title).toBe("新标题");
+    // 再次稳定
+    expect(port.getSnapshot()).toBe(c);
   });
 });

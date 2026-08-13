@@ -1391,13 +1391,26 @@ export class DocumentSession implements DocumentSessionV1 {
 /**
  * RuntimeDocumentPort 适配（运行时协议 3.1）：把 DocumentSessionV1 包装成
  * Runtime 消费的 DocumentSnapshot + 状态映射。Obsidian 层无需自行适配。
+ *
+ * useSyncExternalStore 要求 getSnapshot 在无变化时返回同一引用：
+ * session.getSnapshot() 在 sessionVersion 不变时保证引用稳定，
+ * save 信封 rebase 时返回新引用并发布通知——以此引用做缓存键，
+ * 既能避免无限重渲染，又能让信封变化正确传导。
  */
 export function toRuntimeDocumentPort(
   session: DocumentSessionV1,
 ): import("../runtime/types").RuntimeDocumentPort {
+  let cachedDoc: import("@ocs/contracts").DeepReadonly<import("@ocs/contracts").ComponentsDocumentV1> | null = null;
+  let cached:
+    | import("../runtime/types").DocumentSnapshot
+    | null = null;
   return {
     getSnapshot() {
       const doc = session.getSnapshot();
+      if (doc === cachedDoc && cached !== null) {
+        return cached;
+      }
+      cachedDoc = doc;
       const nodes = new Map<import("@ocs/contracts").ComponentId, import("@ocs/contracts").ComponentNodeV1>();
       for (const [id, node] of Object.entries(doc.nodes)) {
         nodes.set(id as import("@ocs/contracts").ComponentId, node as unknown as import("@ocs/contracts").ComponentNodeV1);
@@ -1406,7 +1419,7 @@ export function toRuntimeDocumentPort(
       for (const [id, ds] of Object.entries(doc.dataSources)) {
         dataSources.set(id as import("@ocs/contracts").DataSourceId, ds as unknown as import("@ocs/contracts").PersistedDataSourceSpecV1);
       }
-      return {
+      cached = {
         documentId: doc.documentId,
         sourcePath: session.getPath(),
         sessionVersion: session.getSessionVersion(),
@@ -1417,6 +1430,7 @@ export function toRuntimeDocumentPort(
         permissions: doc.permissions as unknown as import("@ocs/contracts").PermissionManifestV1,
         metadata: doc.metadata as unknown as import("@ocs/contracts").DocumentMetadataV1,
       };
+      return cached;
     },
     subscribe(listener: () => void) {
       return session.subscribe(listener);
