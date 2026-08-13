@@ -31,7 +31,7 @@ function renderMarkdown(markdown: string, container: HTMLElement): void {
     if (line.includes("---") && inTable) continue;
     const escape = (s: string): string =>
       s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    let cell = escape(line).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    const cell = escape(line).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
     if (inTable && line.startsWith("|")) {
       const cells = cell
         .split("|")
@@ -88,11 +88,11 @@ function makePlatform(): PlatformPort {
       };
       return {
         mode: "light",
-        accentColor: tokens.accent,
+        accentColor: tokens.accent ?? null,
         fontScale: 1,
         reducedMotion: false,
         highContrast: false,
-        tokens,
+        tokens: tokens as ThemeSnapshot["tokens"],
       };
     },
     subscribe: () => () => {},
