@@ -1,15 +1,30 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
-import { copyFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
 const prod = process.argv[2] === "production";
 
+/**
+ * 产物 styles.css = 主样式 + 内置组件目录样式（按固定顺序拼接）。
+ * Obsidian 只加载插件根目录的 styles.css；组件样式的 Locality 由
+ * 构建期合并保留，不依赖运行时 CSS 注入。
+ */
 async function copyStyles() {
+  const parts = [
+    "src/styles.css",
+    "src/widgets/core-layout/styles.css",
+    "src/widgets/core-markdown/styles.css",
+    "src/widgets/time-clock/styles.css",
+  ];
   try {
-    await copyFile("src/styles.css", "styles.css");
+    const chunks = [];
+    for (const file of parts) {
+      chunks.push(await readFile(file, "utf8"));
+    }
+    await writeFile("styles.css", chunks.join("\n\n"), "utf8");
   } catch (err) {
-    console.error("styles.css 复制失败:", err);
+    console.error("styles.css 合并失败:", err);
   }
 }
 

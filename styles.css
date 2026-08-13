@@ -151,3 +151,148 @@ body {
     --ocs-text-muted: var(--text-muted);
   }
 }
+
+
+/**
+ * core.layout 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="core.layout"]` 之下。
+ */
+.ocs-component[data-component-type="core.layout"] .ocs-component-layout {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 24px;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-columns {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-columns.wrap {
+  flex-wrap: wrap;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-columns.equal .ocs-layout-col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-grid {
+  display: block;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-grid-cell {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tabs .ocs-layout-tablist {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tabs.vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tabs.vertical .ocs-layout-tablist {
+  flex-direction: column;
+  flex: 0 0 auto;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tabs.vertical .ocs-layout-tabpanel {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tab {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tab.active {
+  border-color: var(--background-modifier-border);
+  background: var(--background-secondary);
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-tab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-empty {
+  color: var(--text-muted);
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+}
+
+
+/**
+ * core.markdown 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="core.markdown"]` 之下。
+ */
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 24px;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-content {
+  overflow-wrap: break-word;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-loading,
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-empty {
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-error {
+  color: var(--text-error);
+  border: 1px solid var(--background-modifier-error);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+
+/**
+ * time.clock 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="time.clock"]` 之下。
+ */
+.ocs-component[data-component-type="time.clock"] .ocs-clock {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ocs-component[data-component-type="time.clock"] .ocs-clock-denied,
+.ocs-component[data-component-type="time.clock"] .ocs-clock-error {
+  color: var(--text-muted);
+  white-space: normal;
+}
+
+.ocs-component[data-component-type="time.clock"] .ocs-clock-error {
+  color: var(--text-error);
+}

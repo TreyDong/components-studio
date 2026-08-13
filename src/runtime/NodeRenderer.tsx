@@ -391,21 +391,32 @@ export function createComponentRuntimeApi(params: ComponentApiParams): Component
   };
 }
 
-/** edit 模式 NodeFrame：data-component-type 包装 div，捕获点击（只选择，不动作）。 */
+/**
+ * 组件作用域帧：所有模式（view/embedded/preview/edit）都渲染
+ * `.ocs-component[data-component-type]` 根作用域（规格 9.6）；
+ * 只有 edit 模式拦截点击（只选择，不动作）。
+ */
 function NodeFrame(props: {
   node: ComponentNodeV1;
   locked: boolean;
+  interactive: boolean;
   children: ReactNode;
 }): JSX.Element {
-  const { node, locked, children } = props;
+  const { node, locked, interactive, children } = props;
   return (
     <div
       data-component-type={node.type}
       data-component-id={node.id}
       data-node-locked={locked ? "true" : undefined}
       data-node-enabled={node.enabled ? "true" : "false"}
-      className="ocs-node-frame"
-      onClick={(event) => event.stopPropagation()}
+      className="ocs-component ocs-node-frame"
+      onClick={
+        interactive
+          ? (event) => {
+              event.stopPropagation();
+            }
+          : undefined
+      }
     >
       {children}
     </div>
@@ -708,9 +719,10 @@ function NodeRendererBody(props: NodeRendererBodyProps): JSX.Element {
   }
 
   const resetKey = `${node.id}|${node.type}|${node.specVersion}|${nodeContentHash(node)}`;
+  // thumbnail 已有自己的占位容器（带 data-component-type），不再包 NodeFrame。
   const wrapped =
-    mode === "edit" ? (
-      <NodeFrame node={node} locked={locked}>
+    mode !== "thumbnail" ? (
+      <NodeFrame node={node} locked={locked} interactive={mode === "edit"}>
         {rendererElement}
       </NodeFrame>
     ) : (
