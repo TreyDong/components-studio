@@ -98,16 +98,6 @@ describe("legacy 迁移", () => {
     const registry = buildRegistry();
     const codec = new DocumentCodec(registry.codecView());
 
-    // nav-list 需要 workspace:navigate 文档声明（四重 AND 授权）。
-    document.permissions = {
-      requested: [
-        {
-          capability: "workspace:navigate",
-          reason: "导航列表打开笔记",
-        },
-      ],
-    };
-
     // 从 legacy custom 节点提取导航数据
     let navNode: ComponentNodeV1 | null = null;
     for (const node of Object.values(document.nodes)) {
@@ -116,6 +106,18 @@ describe("legacy 迁移", () => {
         navNode = navListNodeFromLegacy(legacyNode, document.documentId);
         if (navNode) break;
       }
+    }
+
+    // nav-list 需要 workspace:navigate 文档声明（四重 AND 授权）；无 nav-list 不声明。
+    if (navNode) {
+      document.permissions = {
+        requested: [
+          {
+            capability: "workspace:navigate",
+            reason: "导航列表打开笔记",
+          },
+        ],
+      };
     }
 
     if (navNode) {
