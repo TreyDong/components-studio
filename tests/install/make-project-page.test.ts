@@ -198,7 +198,7 @@ function buildDocument(): ComponentsDocumentV1 {
     bindings: [],
     events: {},
     extensions: {},
-  } as ComponentNodeV1;
+  } as unknown as ComponentNodeV1;
   nodes[rootId] = rootNode;
   for (const c of layout) {
     nodes[c.id as ComponentId] = node(c.id, c.type, c.props);
