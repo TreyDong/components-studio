@@ -1,0 +1,130 @@
+- generic [ref=e4]:
+  - navigation "项目导航" [ref=e8]:
+    - list [ref=e10]:
+      - listitem [ref=e11]:
+        - button "总览" [ref=e12]: layout总览
+      - listitem [ref=e13]:
+        - button "看板" [ref=e14]: columns看板
+      - listitem [ref=e15]:
+        - button "任务" [ref=e16]: check任务
+      - listitem [ref=e17]:
+        - button "日历" [ref=e18]: calendar日历
+  - generic [ref=e24]:
+    - heading "📊 项目指标" [level=3] [ref=e25]
+    - table [ref=e26]:
+      - rowgroup [ref=e27]:
+        - row [ref=e28]:
+          - cell "指标" [ref=e29]
+          - cell "数值" [ref=e30]
+        - row [ref=e31]:
+          - cell "项目总数" [ref=e32]
+          - cell "12" [ref=e33]
+        - row [ref=e34]:
+          - cell "进行中" [ref=e35]
+          - cell "5" [ref=e36]
+        - row [ref=e37]:
+          - cell "本周完成" [ref=e38]
+          - cell "3" [ref=e39]
+        - row [ref=e40]:
+          - cell "逾期" [ref=e41]
+          - cell "1" [ref=e42]
+    - paragraph [ref=e43]: 静态示例：真实数据由 Phase 2 数据组件提供
+  - generic [ref=e49]:
+    - heading "🗂 看板" [level=3] [ref=e50]
+    - heading [level=3] [ref=e51]:
+      - text: trong>待办
+      - generic [ref=e52]:
+        - checkbox "设计评审" [disabled] [ref=e53]
+        - text: 设计评审
+      - generic [ref=e54]:
+        - checkbox "API 联调" [disabled] [ref=e55]
+        - text: API 联调
+    - heading [level=3] [ref=e56]:
+      - text: trong>进行中
+      - generic [ref=e57]:
+        - checkbox "组件库重构" [disabled] [ref=e58]
+        - text: 组件库重构
+      - generic [ref=e59]:
+        - checkbox "首页性能优化" [disabled] [ref=e60]
+        - text: 首页性能优化
+    - heading [level=3] [ref=e61]:
+      - text: trong>已完成
+      - generic [ref=e62]:
+        - checkbox "项目初始化" [checked] [disabled] [ref=e63]
+        - text: 项目初始化
+      - generic [ref=e64]:
+        - checkbox "需求冻结" [checked] [disabled] [ref=e65]
+        - text: 需求冻结
+  - generic [ref=e71]:
+    - heading "✅ 本周任务" [level=3] [ref=e72]
+    - listitem [ref=e73]: 周一：看板组件落地
+    - listitem [ref=e74]: 周二：日历排期联调
+    - listitem [ref=e75]: 周三：指标卡样式
+    - listitem [ref=e76]: 周四：整体走查
+    - listitem [ref=e77]: 周五：发布预览
+  - generic [ref=e81]:
+    - generic [ref=e82]:
+      - button "上个月" [ref=e83]: ‹
+      - heading "排期 · August 2026" [level=2] [ref=e84]
+      - button "下个月" [ref=e85]: ›
+    - table [ref=e86]:
+      - caption [ref=e87]: 排期 · August 2026
+      - rowgroup [ref=e88]:
+        - row [ref=e89]:
+          - columnheader "Mon" [ref=e90]
+          - columnheader "Tue" [ref=e91]
+          - columnheader "Wed" [ref=e92]
+          - columnheader "Thu" [ref=e93]
+          - columnheader "Fri" [ref=e94]
+          - columnheader "Sat" [ref=e95]
+          - columnheader "Sun" [ref=e96]
+      - rowgroup [ref=e97]:
+        - row [ref=e98]:
+          - cell "Monday, July 27, 2026" [ref=e99]: "27"
+          - cell "Tuesday, July 28, 2026" [ref=e100]: "28"
+          - cell "Wednesday, July 29, 2026" [ref=e101]: "29"
+          - cell "Thursday, July 30, 2026" [ref=e102]: "30"
+          - cell "Friday, July 31, 2026" [ref=e103]: "31"
+          - cell "Saturday, August 1, 2026" [ref=e104]: "1"
+          - cell "Sunday, August 2, 2026" [ref=e105]: "2"
+        - row [ref=e106]:
+          - cell "Monday, August 3, 2026" [ref=e107]: "3"
+          - cell "Tuesday, August 4, 2026" [ref=e108]: "4"
+          - cell "Wednesday, August 5, 2026" [ref=e109]: "5"
+          - cell "Thursday, August 6, 2026" [ref=e110]: "6"
+          - cell "Friday, August 7, 2026" [ref=e111]: "7"
+          - cell "Saturday, August 8, 2026" [ref=e112]: "8"
+          - cell "Sunday, August 9, 2026" [ref=e113]: "9"
+        - row [ref=e114]:
+          - cell "Monday, August 10, 2026" [ref=e115]: "10"
+          - cell "Tuesday, August 11, 2026" [ref=e116]: "11"
+          - cell "Wednesday, August 12, 2026" [ref=e117]: "12"
+          - cell "Thursday, August 13, 2026" [ref=e118]: "13"
+          - cell "Friday, August 14, 2026" [ref=e119]: "14"
+          - cell "Saturday, August 15, 2026" [ref=e120]: "15"
+          - cell "Sunday, August 16, 2026" [ref=e121]: "16"
+        - row [ref=e122]:
+          - cell "Monday, August 17, 2026" [ref=e123]: "17"
+          - cell "Tuesday, August 18, 2026" [ref=e124]: "18"
+          - cell "Wednesday, August 19, 2026" [ref=e125]: "19"
+          - cell "Thursday, August 20, 2026" [ref=e126]: "20"
+          - cell "Friday, August 21, 2026" [ref=e127]: "21"
+          - cell "Saturday, August 22, 2026" [ref=e128]: "22"
+          - cell "Sunday, August 23, 2026" [ref=e129]: "23"
+        - row [ref=e130]:
+          - cell "Monday, August 24, 2026" [ref=e131]: "24"
+          - cell "Tuesday, August 25, 2026" [ref=e132]: "25"
+          - cell "Wednesday, August 26, 2026" [ref=e133]: "26"
+          - cell "Thursday, August 27, 2026" [ref=e134]: "27"
+          - cell "Friday, August 28, 2026" [ref=e135]: "28"
+          - cell "Saturday, August 29, 2026" [ref=e136]: "29"
+          - cell "Sunday, August 30, 2026" [ref=e137]: "30"
+        - row [ref=e138]:
+          - cell "Monday, August 31, 2026" [ref=e139]: "31"
+          - cell "Tuesday, September 1, 2026" [ref=e140]: "1"
+          - cell "Wednesday, September 2, 2026" [ref=e141]: "2"
+          - cell "Thursday, September 3, 2026" [ref=e142]: "3"
+          - cell "Friday, September 4, 2026" [ref=e143]: "4"
+          - cell "Saturday, September 5, 2026" [ref=e144]: "5"
+          - cell "Sunday, September 6, 2026" [ref=e145]: "6"
+  - time [ref=e149]: Aug 14, 2026, 00:33:55
