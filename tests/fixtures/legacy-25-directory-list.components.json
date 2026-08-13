@@ -1,0 +1,57 @@
+{
+  "rootComponentId": "bfa903a2-46ca-4ae8-9874-d5dfadc4a1cb",
+  "components": [
+    {
+      "id": "bfa903a2-46ca-4ae8-9874-d5dfadc4a1cb",
+      "type": "multi",
+      "titleAlign": "center",
+      "tabTitle": "",
+      "maxWidthRatio": -1,
+      "showBorder": false,
+      "showTitle": true,
+      "showShadow": false,
+      "createAt": "2025-08-26T08:38:54.487Z",
+      "updateAt": "2025-08-26T08:38:54.487Z",
+      "components": [
+        {
+          "componentId": "3921b85c-35a6-4e0d-8d9e-cca5ce01b478"
+        }
+      ],
+      "layoutType": "list",
+      "locked": false,
+      "layoutOptions": {}
+    },
+    {
+      "id": "3921b85c-35a6-4e0d-8d9e-cca5ce01b478",
+      "type": "custom",
+      "titleAlign": "center",
+      "tabTitle": "",
+      "maxWidthRatio": -1,
+      "showBorder": false,
+      "showTitle": true,
+      "showShadow": false,
+      "createAt": "2025-08-26T08:39:01.538Z",
+      "updateAt": "2025-11-03T09:16:16.815Z",
+      "viewCode": "/* 结构等价 fixture：原始 viewCode 为旧插件可执行代码，此处仅保留字符串形态 */\nfunction App() {\n  const { getData } = useDataStorage();\n  const app = useObsidianApp();\n  return null;\n}",
+      "settingsCode": "function App() { return null; }",
+      "cssCode": ".nav-list--container { padding: var(--size-4-2); }",
+      "data": {
+        "settings": {
+          "menuItems": [
+            { "label": "Home", "icon": "House", "link": "[[home.components]]" },
+            { "label": "Components", "icon": "ChartNoAxesGantt", "link": "[[components_home.components]]" },
+            { "label": "Work", "icon": "Command", "link": "[[work_project.components]]" },
+            { "label": "life", "icon": "File", "link": "[[life.components]]" },
+            { "label": "journal", "icon": "Calendar", "link": "[[journal.components]]" },
+            { "label": "output", "icon": "Lightbulb", "link": "[[output-dashboard.components]]" },
+            { "label": "health", "icon": "File", "link": "[[health.components]]" },
+            { "label": "Bill", "icon": "File", "link": "[[Bill.components]]" }
+          ],
+          "enableRainbowBackground": true
+        }
+      }
+    }
+  ],
+  "modified": 1761484829786,
+  "version": 3
+}
