@@ -11,11 +11,14 @@ const prod = process.argv[2] === "production";
  * 构建期合并保留，不依赖运行时 CSS 注入。
  */
 async function copyStyles() {
+  const { readdir } = await import("node:fs/promises");
+  const widgetDirs = (await readdir("src/widgets", { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
   const parts = [
     "src/styles.css",
-    "src/widgets/core-layout/styles.css",
-    "src/widgets/core-markdown/styles.css",
-    "src/widgets/time-clock/styles.css",
+    ...widgetDirs.map((name) => `src/widgets/${name}/styles.css`),
   ];
   try {
     const chunks = [];

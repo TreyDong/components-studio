@@ -34,6 +34,7 @@ import { parseComponentsEmbedOptions } from "../platform/obsidian/embed-options"
 import { coreLayoutDefinition } from "../widgets/core-layout";
 import { coreMarkdownDefinition } from "../widgets/core-markdown";
 import { timeClockDefinition } from "../widgets/time-clock";
+import { timeCalendarDefinition } from "../widgets/time-calendar";
 import { DocumentFileCreatorImpl } from "./create-document";
 import { registerCreateDocumentCommand, registerOpenFileCommand } from "./commands";
 import { ComponentsStudioSettingTab, DEFAULT_SETTINGS, type PluginSettings } from "./settings";
@@ -119,6 +120,7 @@ export class ComponentsStudioPlugin extends Plugin {
       registry.register(coreLayoutDefinition),
       registry.register(coreMarkdownDefinition),
       registry.register(timeClockDefinition),
+      registry.register(timeCalendarDefinition),
     ].find((result) => !result.ok);
     if (registerResult && !registerResult.ok) {
       new Notice(`注册内置组件失败：${registerResult.error.message}`);

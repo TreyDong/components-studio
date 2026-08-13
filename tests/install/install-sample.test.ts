@@ -140,15 +140,37 @@ describe("install-sample", () => {
       { label: "添加 clock", expectedSessionVersion: 1, mergeKey: null },
     );
     expect(r2.ok).toBe(true);
+    const calendarNode = childNode("time.calendar", "44444444-4444-4444-8444-444444444444");
+    calendarNode.props = {
+      locale: "system",
+      firstDayOfWeek: 1,
+      showWeekNumbers: false,
+      showToday: true,
+      showAdjacentDays: false,
+      label: "",
+    };
     const r3 = session.dispatch(
+      {
+        commandId: "add-calendar" as import("@ocs/contracts").CommandId,
+        kind: "component.add",
+        parentId: session.getSnapshot().rootId,
+        slot: "children",
+        index: 2,
+        node: calendarNode,
+        placement: DEFAULT_CHILD_PLACEMENT_V1,
+      },
+      { label: "添加日历", expectedSessionVersion: 2, mergeKey: null },
+    );
+    expect(r3.ok).toBe(true);
+    const r4 = session.dispatch(
       {
         commandId: "request-timer" as import("@ocs/contracts").CommandId,
         kind: "document.permissions.replace",
         permissions: { requested: [{ capability: "timer:use", reason: "时钟组件需要" }] },
       },
-      { label: "声明能力", expectedSessionVersion: 2, mergeKey: null },
+      { label: "声明能力", expectedSessionVersion: 3, mergeKey: null },
     );
-    expect(r3.ok).toBe(true);
+    expect(r4.ok).toBe(true);
 
     const saved = await session.save("manual");
     expect(saved.ok).toBe(true);

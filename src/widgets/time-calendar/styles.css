@@ -1,0 +1,132 @@
+/**
+ * time.calendar 样式：作用域限定在宿主渲染帧
+ * `.ocs-component[data-component-type="time.calendar"]` 之下，只依赖 --ocs-* Token。
+ */
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 420px;
+  background: var(--ocs-surface);
+  border: 1px solid var(--ocs-border);
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+  color: var(--ocs-text);
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-title {
+  flex: 1 1 auto;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-nav-btn {
+  min-width: 32px;
+  min-height: 32px;
+  border: 1px solid var(--ocs-border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ocs-text);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-nav-btn:hover {
+  background: var(--ocs-surface-hover);
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-nav-btn:focus-visible,
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-today-btn:focus-visible {
+  outline: 2px solid var(--ocs-accent);
+  outline-offset: 1px;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-today-btn {
+  min-height: 32px;
+  border: 1px solid var(--ocs-accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ocs-accent);
+  font-size: 12px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-today-btn:hover {
+  background: var(--ocs-surface-hover);
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-weekday {
+  color: var(--ocs-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-weeknum-head,
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-weeknum {
+  color: var(--ocs-text-muted);
+  font-size: 11px;
+  text-align: center;
+  width: 24px;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-day:hover {
+  background: var(--ocs-surface-hover);
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-today {
+  background: var(--ocs-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.ocs-component[data-component-type="time.calendar"] .ocs-calendar-adjacent {
+  color: var(--ocs-text-muted);
+  opacity: 0.45;
+}
+
+/* 移动端点击区 ≥44×44（规格 12.6）。 */
+@media (pointer: coarse) {
+  .ocs-component[data-component-type="time.calendar"] .ocs-calendar-day {
+    width: 44px;
+    height: 44px;
+  }
+  .ocs-component[data-component-type="time.calendar"] .ocs-calendar-nav-btn,
+  .ocs-component[data-component-type="time.calendar"] .ocs-calendar-today-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
