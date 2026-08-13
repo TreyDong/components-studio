@@ -1,0 +1,27 @@
+/**
+ * legacy.components-2-5 占位样式。
+ */
+.ocs-component[data-component-type="legacy.components-2-5"] .ocs-legacy-placeholder {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px dashed var(--ocs-border);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--ocs-surface);
+  color: var(--ocs-text-muted);
+  font-size: 13px;
+}
+
+.ocs-component[data-component-type="legacy.components-2-5"] .ocs-legacy-title {
+  font-weight: 600;
+  color: var(--ocs-text);
+  margin-bottom: 4px;
+}
+
+.ocs-component[data-component-type="legacy.components-2-5"] .ocs-legacy-meta {
+  margin-bottom: 4px;
+}
+
+.ocs-component[data-component-type="legacy.components-2-5"] .ocs-legacy-hint {
+  opacity: 0.8;
+}

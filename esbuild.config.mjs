@@ -11,7 +11,7 @@ const prod = process.argv[2] === "production";
  * 构建期合并保留，不依赖运行时 CSS 注入。
  */
 async function copyStyles() {
-  const { readdir } = await import("node:fs/promises");
+  const { readdir, stat } = await import("node:fs/promises");
   const widgetDirs = (await readdir("src/widgets", { withFileTypes: true }))
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
@@ -23,7 +23,12 @@ async function copyStyles() {
   try {
     const chunks = [];
     for (const file of parts) {
-      chunks.push(await readFile(file, "utf8"));
+      try {
+        const st = await stat(file);
+        if (st.isFile()) chunks.push(await readFile(file, "utf8"));
+      } catch {
+        // 组件目录可以没有 styles.css；跳过。
+      }
     }
     await writeFile("styles.css", chunks.join("\n\n"), "utf8");
   } catch (err) {
