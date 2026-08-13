@@ -3,6 +3,8 @@ import { defineConfig } from "vitest/config";
 import { fileURLToPath } from "node:url";
 
 const alias = {
+  // 测试环境下把 obsidian 包指向桩实现（obsidian npm 包是 types-only）。
+  obsidian: fileURLToPath(new URL("./tests/platform/obsidian-stub.ts", import.meta.url)),
   // 子路径别名必须先于裸别名，避免 Vite 前缀匹配把 @ocs/contracts/document 解析到 index.ts 下。
   "@ocs/contracts/common": fileURLToPath(new URL("./src/contracts/common.ts", import.meta.url)),
   "@ocs/contracts/document": fileURLToPath(new URL("./src/contracts/document.ts", import.meta.url)),

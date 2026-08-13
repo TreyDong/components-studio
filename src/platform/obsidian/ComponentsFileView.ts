@@ -259,6 +259,12 @@ export class ComponentsFileView extends TextFileView {
     if (path.length === 0) {
       return;
     }
+    // 同一个 leaf 切换到不同文件时必须重建 binding：
+    // 否则 getViewData 会返回旧 session 的序列化，Obsidian 保存时把
+    // 旧文件内容写到新路径（数据安全事故）。
+    if (this.binding && this.binding.path !== path) {
+      await this.teardown();
+    }
     if (!this.binding) {
       const deps = this.getDeps();
       if (!deps) {
@@ -284,7 +290,7 @@ export class ComponentsFileView extends TextFileView {
       });
       return;
     }
-    // 后续 setViewData：own-write hash 相同则忽略，否则交给外部协调。
+    // 后续 setViewData（同路径）：own-write hash 相同则忽略，否则交给外部协调。
     await this.binding.acceptExternalText(data);
   }
 
