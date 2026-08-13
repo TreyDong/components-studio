@@ -1,0 +1,31 @@
+/**
+ * core.markdown 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="core.markdown"]` 之下。
+ */
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 24px;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-content {
+  overflow-wrap: break-word;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-loading,
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-empty {
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+
+.ocs-component[data-component-type="core.markdown"] .ocs-markdown-error {
+  color: var(--text-error);
+  border: 1px solid var(--background-modifier-error);
+  border-radius: 6px;
+  padding: 8px 12px;
+}

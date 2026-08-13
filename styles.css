@@ -1,0 +1,153 @@
+/*
+ * Components Studio 样式（《技术规格 v1》第 12.7 节）。
+ *
+ * - --ocs-* 语义 Token 映射到 Obsidian 变量（body 上定义，随主题切换）。
+ * - .ocs-component 宿主作用域；编辑模式节点以
+ *   .ocs-component[data-component-type] 为根作用域。
+ * - 组件只依赖 --ocs-* Token；必须支持浅色/深色/减少动画/高对比。
+ */
+
+/* ---------------------------------------------------------------------------
+ * --ocs-* 语义 Token（唯一映射点）
+ * ------------------------------------------------------------------------- */
+body {
+  --ocs-background: var(--background-primary);
+  --ocs-surface: var(--background-secondary);
+  --ocs-surface-hover: var(--background-modifier-hover);
+  --ocs-text: var(--text-normal);
+  --ocs-text-muted: var(--text-muted);
+  --ocs-border: var(--background-modifier-border);
+  --ocs-accent: var(--interactive-accent);
+  --ocs-danger: var(--text-error);
+  --ocs-success: var(--text-success);
+  --ocs-warning: var(--text-warning);
+}
+
+/* ---------------------------------------------------------------------------
+ * 宿主容器
+ * ------------------------------------------------------------------------- */
+.ocs-view-host,
+.ocs-embed {
+  --ocs-component-gap: 12px;
+  box-sizing: border-box;
+  color: var(--ocs-text);
+  background: var(--ocs-background);
+  font-size: calc(var(--font-text-size, 16px) * 1);
+  line-height: var(--line-height-normal, 1.5);
+  overflow: auto;
+}
+
+.ocs-view-host {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+}
+
+.ocs-embed {
+  width: 100%;
+  min-height: 24px;
+  border: 1px solid var(--ocs-border);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.ocs-embed-error {
+  color: var(--ocs-danger);
+  font-family: var(--font-monospace, monospace);
+  font-size: 0.85em;
+  white-space: pre-wrap;
+}
+
+/* ---------------------------------------------------------------------------
+ * 组件作用域：编辑模式 NodeFrame 与未来自定义样式统一入口
+ * ------------------------------------------------------------------------- */
+.ocs-component,
+.ocs-component[data-component-type] {
+  box-sizing: border-box;
+}
+
+.ocs-component *,
+.ocs-component *::before,
+.ocs-component *::after {
+  box-sizing: border-box;
+}
+
+.ocs-component a {
+  color: var(--ocs-accent);
+}
+
+.ocs-component code {
+  font-family: var(--font-monospace, monospace);
+  background: var(--ocs-surface);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+/* ---------------------------------------------------------------------------
+ * 通用小组件原语（内置组件共用）
+ * ------------------------------------------------------------------------- */
+.ocs-button {
+  appearance: none;
+  border: 1px solid var(--ocs-border);
+  border-radius: 6px;
+  background: var(--ocs-surface);
+  color: var(--ocs-text);
+  padding: 6px 12px;
+  font: inherit;
+  cursor: pointer;
+  min-height: 32px;
+}
+
+.ocs-button:hover {
+  background: var(--ocs-surface-hover);
+}
+
+.ocs-button:focus-visible {
+  outline: 2px solid var(--ocs-accent);
+  outline-offset: 1px;
+}
+
+.ocs-card {
+  border: 1px solid var(--ocs-border);
+  border-radius: 8px;
+  background: var(--ocs-surface);
+  padding: 12px;
+}
+
+.ocs-empty,
+.ocs-loading,
+.ocs-error {
+  color: var(--ocs-text-muted);
+  padding: 8px;
+  font-size: 0.9em;
+}
+
+.ocs-error {
+  color: var(--ocs-danger);
+}
+
+/* ---------------------------------------------------------------------------
+ * 减少动画 / 高对比
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .ocs-component,
+  .ocs-component *,
+  .ocs-component *::before,
+  .ocs-component *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  body {
+    --ocs-border: var(--background-modifier-border);
+  }
+
+  .ocs-component {
+    --ocs-text: var(--text-normal);
+    --ocs-text-muted: var(--text-muted);
+  }
+}

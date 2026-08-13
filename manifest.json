@@ -1,0 +1,9 @@
+{
+  "id": "components-studio",
+  "name": "Components Studio",
+  "version": "0.1.0",
+  "minAppVersion": "1.7.2",
+  "description": "Build dynamic Obsidian pages from versioned component documents and trusted React components.",
+  "author": "Trey",
+  "isDesktopOnly": false
+}

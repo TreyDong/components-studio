@@ -1,0 +1,18 @@
+/**
+ * time.clock 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="time.clock"]` 之下。
+ */
+.ocs-component[data-component-type="time.clock"] .ocs-clock {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ocs-component[data-component-type="time.clock"] .ocs-clock-denied,
+.ocs-component[data-component-type="time.clock"] .ocs-clock-error {
+  color: var(--text-muted);
+  white-space: normal;
+}
+
+.ocs-component[data-component-type="time.clock"] .ocs-clock-error {
+  color: var(--text-error);
+}

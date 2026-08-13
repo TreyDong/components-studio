@@ -1,0 +1,45 @@
+{
+  "name": "components-studio",
+  "version": "0.1.0",
+  "description": "Build dynamic Obsidian pages from versioned component documents and trusted React components.",
+  "main": "main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "typecheck": "tsc -noEmit -skipLibCheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src tests main.ts esbuild.config.mjs vitest.config.ts",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "keywords": [
+    "obsidian",
+    "plugin",
+    "react",
+    "components",
+    "components-studio"
+  ],
+  "author": "Trey",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "26.2.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@vitejs/plugin-react": "6.0.5",
+    "builtin-modules": "5.3.0",
+    "esbuild": "0.28.2",
+    "eslint": "9.39.5",
+    "jsdom": "30.0.1",
+    "obsidian": "1.13.1",
+    "tslib": "2.8.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.67.0",
+    "vitest": "4.1.10"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  }
+}
