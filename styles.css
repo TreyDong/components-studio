@@ -11,16 +11,16 @@
  * --ocs-* 语义 Token（唯一映射点）
  * ------------------------------------------------------------------------- */
 body {
-  --ocs-background: var(--background-primary);
-  --ocs-surface: var(--background-secondary);
-  --ocs-surface-hover: var(--background-modifier-hover);
-  --ocs-text: var(--text-normal);
-  --ocs-text-muted: var(--text-muted);
-  --ocs-border: var(--background-modifier-border);
-  --ocs-accent: var(--interactive-accent);
-  --ocs-danger: var(--text-error);
-  --ocs-success: var(--text-success);
-  --ocs-warning: var(--text-warning);
+  --ocs-background: var(--background-primary, #f6f7f9);
+  --ocs-surface: var(--background-secondary, #ffffff);
+  --ocs-surface-hover: var(--background-modifier-hover, #eef0f3);
+  --ocs-text: var(--text-normal, #1e2228);
+  --ocs-text-muted: var(--text-muted, #6b7280);
+  --ocs-border: var(--background-modifier-border, #d8dce2);
+  --ocs-accent: var(--interactive-accent, #4d96ff);
+  --ocs-danger: var(--text-error, #e5484d);
+  --ocs-success: var(--text-success, #30a46c);
+  --ocs-warning: var(--text-warning, #ffb224);
 }
 
 /* ---------------------------------------------------------------------------
