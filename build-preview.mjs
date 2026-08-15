@@ -1,7 +1,8 @@
 import esbuild from "esbuild";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, copyFileSync } from "node:fs";
 
 const outdir = "dist-preview";
+const buildId = Date.now();
 
 const context = await esbuild.context({
   entryPoints: ["src/preview/main.tsx"],
@@ -18,12 +19,19 @@ await context.rebuild();
 await context.dispose();
 
 mkdirSync(outdir, { recursive: true });
+// 预览必须显式携带与 Obsidian 插件一致的样式产物。此前目录中即使
+// 存在 styles.css，index.html 也没有引用它，静态预览会完全无样式。
+copyFileSync("styles.css", `${outdir}/styles.css`);
+copyFileSync("src/preview/dashboard-preview.css", `${outdir}/dashboard-preview.css`);
+copyFileSync("src/preview/project-dashboard.components", `${outdir}/project-dashboard.components`);
 const html = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Components Studio 预览 · 项目管理首页</title>
+<link rel="stylesheet" href="./styles.css?v=${buildId}" />
+<link rel="stylesheet" href="./dashboard-preview.css?v=${buildId}" />
 <style>
   :root {
     --ocs-background: #f6f7f9;
@@ -63,7 +71,7 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
 <div id="app"></div>
-<script src="./preview.js"></script>
+<script src="./preview.js?v=${buildId}"></script>
 </body>
 </html>`;
 writeFileSync(`${outdir}/index.html`, html, "utf8");

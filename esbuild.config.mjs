@@ -18,6 +18,7 @@ async function copyStyles() {
     .sort();
   const parts = [
     "src/styles.css",
+    "src/preview/dashboard-preview.css",
     ...widgetDirs.map((name) => `src/widgets/${name}/styles.css`),
   ];
   try {

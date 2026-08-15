@@ -1,0 +1,72 @@
+{
+  "kind": "components-studio/document",
+  "formatVersion": 1,
+  "documentId": "d0000000-0000-4000-8000-000000000000",
+  "revision": 1,
+  "createdAt": "2026-08-14T08:30:00.000Z",
+  "updatedAt": "2026-08-14T08:30:00.000Z",
+  "rootId": "d0000000-0000-4000-8000-000000000001",
+  "nodes": {
+    "d0000000-0000-4000-8000-000000000001": {
+      "id": "d0000000-0000-4000-8000-000000000001",
+      "type": "core.layout",
+      "specVersion": 1,
+      "enabled": true,
+      "label": "项目中心布局",
+      "props": {
+        "mode": "stack", "gap": 0, "padding": 0, "locked": false,
+        "grid": { "columns": { "compact": 1, "regular": 6, "wide": 12 }, "rowHeight": 80, "dense": false, "allowOverlap": false },
+        "columns": { "wrap": true, "equalWidth": false },
+        "tabs": { "activation": "automatic", "placement": "top" }
+      },
+      "style": {
+        "visibility": "visible",
+        "classNames": [],
+        "width": "fill",
+        "minHeightPx": null,
+        "paddingPx": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "marginPx": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "background": null,
+        "color": null,
+        "border": null,
+        "shadow": "none"
+      },
+      "slots": {
+        "children": [{
+          "nodeId": "d0000000-0000-4000-8000-000000000002",
+          "placement": {
+            "tab": { "title": null, "icon": null, "disabled": false },
+            "column": { "basisBp": 10000, "grow": 1, "shrink": 1, "minWidthPx": 0, "maxWidthPx": null },
+            "grid": {
+              "compact": { "x": 0, "y": 0, "w": 1, "h": 12, "minW": 1, "maxW": null, "minH": 1, "maxH": null },
+              "regular": { "x": 0, "y": 0, "w": 6, "h": 12, "minW": 1, "maxW": null, "minH": 1, "maxH": null },
+              "wide": { "x": 0, "y": 0, "w": 12, "h": 12, "minW": 1, "maxW": null, "minH": 1, "maxH": null }
+            }, "extensions": {}
+          }
+        }]
+      },
+      "bindings": [],
+      "events": {},
+      "extensions": {}
+    },
+    "d0000000-0000-4000-8000-000000000002": {
+      "id": "d0000000-0000-4000-8000-000000000002",
+      "type": "project.dashboard",
+      "specVersion": 1,
+      "enabled": true,
+      "label": "项目中心",
+      "props": { "title": "项目中心", "sourcePath": "Tasks", "taskTag": "task", "project": "components" },
+      "style": {
+        "visibility": "visible", "classNames": [], "width": "fill", "minHeightPx": null,
+        "paddingPx": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "marginPx": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "background": null, "color": null, "border": null, "shadow": "none"
+      },
+      "slots": {}, "bindings": [], "events": {}, "extensions": {}
+    }
+  },
+  "dataSources": {},
+  "permissions": { "requested": [] },
+  "metadata": { "title": "项目中心", "description": "项目仪表盘", "tags": ["project", "dashboard"] },
+  "extensions": {}
+}

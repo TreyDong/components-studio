@@ -1,0 +1,86 @@
+:root { color: #3f414a; background: #f7f8fa; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; }
+* { box-sizing: border-box; } button { font: inherit; color: inherit; cursor: pointer; }
+.dashboard-preview { max-width: 1880px; margin: 0 auto; padding: 22px 34px 38px; font-size: 14px; }
+.top-nav, .workspace { border: 1px solid #eceef2; border-radius: 10px; background: #fff; box-shadow: 0 2px 9px #171b2310; }.top-nav { height: 54px; display:flex; justify-content:space-between; align-items:center; padding: 0 14px; margin-bottom: 20px; }.top-nav nav, .workspace nav, .board-tabs { display:flex; gap:8px; align-items:center; }.top-nav button, .workspace-head button, .board-tabs button { border:0; background:transparent; padding:8px 10px; border-radius:6px; font-weight:600; }.top-nav .active, .workspace button.active { background:#eef0f2; }.settings { border:0; background:transparent; color:#99a0ad; }
+.metrics { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; }.metric, .small-stat, .dash-panel { background:#fff; border:1px solid #e8eaee; border-radius:9px; box-shadow: 0 2px 7px #1c23300c; }.metric { min-height:108px; padding:22px 18px; display:flex; flex-direction:column; gap:9px; }.metric span, .small-stat span { font-weight:600; font-size:13px; }.metric b { font-size:27px; letter-spacing:.2px; }.completion { position:relative; }.completion b { font-size:27px; }.progress { height:18px; background:#f4f4f6; border-radius:3px; overflow:hidden; margin-top:4px; }.progress i { display:block; height:100%; width:89.28%; background:#555560; }.completion small { position:absolute; right:17px; bottom:20px; color:#747985; font-weight:600; }
+.analytics { display:grid; grid-template-columns: 1.15fr 1.16fr 1fr; gap:14px; margin-top:14px; }.dash-panel { min-height:315px; overflow:hidden; }.chart-panel { padding:19px 20px 12px; }.dash-panel h2 { margin:0; text-align:center; font-size:15px; }.legend { display:flex; justify-content:center; gap:8px; margin:8px 0 12px; font-size:12px; }.legend span { width:24px; height:14px; border-radius:4px; }.legend .red{background:#ed6d66}.legend .blue{background:#789fa5}.legend .orange{background:#f19a7f}.legend .green{background:#85c4ac}.bar-chart{height:221px; display:flex; align-items:flex-end; gap:4px; position:relative; padding:0 4px 28px}.chart-grid { inset:8px 0 28px; position:absolute; background:repeating-linear-gradient(to bottom, transparent 0 32px, #b8bec8 33px 34px); opacity:.75}.bar-slot{flex:1; display:flex; align-items:flex-end; height:100%; position:relative; min-width:0}.bar{width:33%; min-height:4px}.green-bar{background:#80bea8}.blue-bar{background:#789ea4}.red-bar{background:#eb766d}.bar-slot span{position:absolute; bottom:-25px; font-size:10px; transform:rotate(-56deg); white-space:nowrap; color:#737886}
+.heat-panel { padding:0 12px; }.panel-tabs { display:flex; align-items:center; gap:12px; height:44px; border-bottom:1px solid #eff0f2; white-space:nowrap; overflow:hidden; }.panel-tabs button{border:0;background:transparent;font-weight:600;color:#7c828e}.panel-tabs .selected{padding:7px 9px;background:#eff0f2;border-radius:6px;color:#444853}.heat-panel h2{margin-top:39px}.heat-legend{display:flex;justify-content:center;align-items:center;gap:5px;font-size:10px;margin:14px 0 13px;color:#69707c}.heat-legend span{width:14px;height:12px;border-radius:3px;background:#9cebb0}.heat-legend span:nth-of-type(2){background:#74d98e}.heat-legend span:nth-of-type(3){background:#3cb968}.heat-legend span:nth-of-type(4){background:#25874b}.heat-legend span:nth-of-type(5){background:#155e36}.month-row{display:grid;grid-template-columns:repeat(12,1fr);padding-left:33px;color:#737986;font-size:11px}.heat-body{display:flex;gap:9px;margin-top:8px}.week-labels{line-height:13px;font-size:10px;color:#69717e;width:22px;text-align:right}.heat-grid{display:grid;grid-template-columns:repeat(52, 8px);grid-template-rows:repeat(5, 8px);gap:3px;grid-auto-flow:column}.heat{border-radius:2px;background:#f1f6f1}.level-1,.level-2{background:#9ceeb2}.level-3,.level-4{background:#5cce80}.level-5,.level-6{background:#27ac5b}.level-7,.level-8{background:#147844}
+.right-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}.small-stat{min-height:143px;text-align:center;padding:20px 12px;display:flex;flex-direction:column;gap:11px}.small-stat b{font-size:27px}.small-stat b small{font-size:12px;font-weight:500;margin:0 8px;color:#737986}.small-stat time{font-size:11px;color:#858b96}.small-stat.due b{font-size:28px;letter-spacing:9px;margin-top:2px}
+.workspace{margin-top:14px;overflow:hidden}.workspace-head,.board-tabs{min-height:49px;display:flex;justify-content:space-between;align-items:center;padding:0 10px;border-bottom:1px solid #eef0f3}.board-tabs{min-height:59px}.board-tabs nav{overflow:auto}.board-tabs .new{border:1px solid #e5e7eb;background:#fff;padding:7px 12px}.filters{height:58px;display:flex;align-items:center;gap:10px;padding:0 16px}.filters button{border:1px solid #e8eaed;background:#fff;border-radius:6px;padding:7px 10px;color:#636977}.filters button:last-child{border-color:transparent;color:#8a919c}.kanban{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));gap:14px;padding:0 16px 22px;overflow:auto}.kanban-column{min-height:302px;border-radius:8px;padding:9px;background:#f0f1f3}.kanban-column.mint{background:#e9f8ef}.kanban-column.peach{background:#fff4e8}.kanban-column h3{margin:0 2px 10px;font-size:15px;letter-spacing:.3px}.kanban-column h3 span{padding:3px 8px;border-radius:7px}.mint h3 span{color:#328f85;background:#d3f4e7}.peach h3 span{color:#e5831e;background:#fff0d8}.gray h3 span{color:#8b9098;background:#e7e9ec}.kanban-column h3 small{color:#707682;margin-left:8px}.kanban-card{background:#fff;border:1px solid #e9eaed;border-radius:8px;padding:12px;margin-bottom:12px;box-shadow:0 1px 3px #25304714;min-height:170px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}.kanban-card strong{font-size:15px;line-height:1.35}.kanban-card em{font-style:normal;font-weight:600;padding:3px 7px;border-radius:4px}.kanban-card em.feature{background:#dff5ef;color:#309989}.kanban-card em.improvement{background:#e0f2fb;color:#3299c8}.kanban-card em.bug{background:#ffe9df;color:#e07c56}.kanban-card div{display:flex;flex-direction:column;align-items:flex-start;gap:5px}.kanban-card div button{border:1px solid #e8eaed;background:#fff;border-radius:4px;padding:3px 7px;font-size:12px}.kanban-card small{margin-top:auto;color:#9aa0aa}.ungrouped{background:#eef0f3}.add{border:0;background:transparent;color:#8a909b;padding:4px}
+@media (max-width: 1050px){.dashboard-preview{padding:16px}.analytics{grid-template-columns:1fr 1fr}.right-stats{grid-column:span 2}.metrics{grid-template-columns:repeat(2,1fr)}}@media (max-width:680px){.analytics{grid-template-columns:1fr}.right-stats{grid-column:auto}.metrics{grid-template-columns:1fr}.heat-grid{grid-template-columns:repeat(52,6px);grid-template-rows:repeat(5,6px);gap:2px}.dashboard-preview{padding:10px}.kanban{grid-template-columns:repeat(5,260px)}}
+
+/* Obsidian 的通用按钮规则不应抢占仪表盘；组件根作用域提高选择器优先级。 */
+.ocs-component[data-component-type="project.dashboard"] { display: block; width: 100%; }
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview { color: #3f414a; }
+.ocs-component[data-component-type="project.dashboard"] .kanban-card.state-done { opacity: .66; background: #effaf4; }
+.ocs-component[data-component-type="project.dashboard"] .kanban-card.state-cancelled { opacity: .52; text-decoration: line-through; }
+.ocs-component[data-component-type="project.dashboard"] .card-result { font-size: 12px; font-weight: 700; color: #398c68; }
+
+/* Obsidian 使用 `.workspace` 管理应用级布局；仪表盘的同名局部容器必须
+   显式退出该规则，否则其子项会被宿主的 grid/flex 分布到整块可用高度。 */
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview .workspace {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin-top: 14px !important;
+  overflow: hidden !important;
+}
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview .workspace-head,
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview .board-tabs,
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview .filters,
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview .kanban {
+  position: static !important;
+  flex: none !important;
+  grid-area: auto !important;
+}
+
+/* Obsidian themes often style generic class names such as .workspace/.active.
+   Keep dashboard controls above theme decoration and available to pointer input. */
+.ocs-component[data-component-type="project.dashboard"] .dashboard-preview button {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto !important;
+}
+
+.ocs-component[data-component-type="project.dashboard"] .task-calendar {
+  padding: 16px 18px 20px;
+  background: #fff;
+}
+
+.ocs-component[data-component-type="project.dashboard"] .calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.ocs-component[data-component-type="project.dashboard"] .calendar-toolbar h3 { margin: 0 0 3px; font-size: 16px; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-toolbar span { color: #8a909b; font-size: 12px; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-toolbar nav { display: flex; gap: 6px; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-toolbar nav button { min-height: 28px; padding: 4px 9px; color: #606772; background: #fff; border: 1px solid #e5e8ed; border-radius: 6px; }
+
+.ocs-component[data-component-type="project.dashboard"] .calendar-weekdays,
+.ocs-component[data-component-type="project.dashboard"] .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.ocs-component[data-component-type="project.dashboard"] .calendar-weekdays { border: 1px solid #e8eaee; border-bottom: 0; border-radius: 8px 8px 0 0; overflow: hidden; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-weekdays span { padding: 8px 10px; color: #9096a1; font-size: 12px; font-weight: 700; text-align: right; background: #fafbfc; border-right: 1px solid #eef0f3; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-weekdays span:last-child { border-right: 0; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-grid { border-left: 1px solid #e8eaee; border-top: 1px solid #e8eaee; border-radius: 0 0 8px 8px; overflow: hidden; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-day { min-height: 104px; padding: 8px; border-right: 1px solid #e8eaee; border-bottom: 1px solid #e8eaee; background: #fff; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-day:nth-child(7n) { border-right: 0; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-day.muted { background: #fafbfc; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-day time { display: block; margin-bottom: 7px; color: #4b5563; font-size: 12px; text-align: right; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-day.muted time { color: #c2c7cf; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-event { display: block; width: 100%; margin: 4px 0; padding: 4px 6px; overflow: hidden; color: #23795c; font-size: 11px; font-weight: 650; line-height: 1.35; text-align: left; text-overflow: ellipsis; white-space: nowrap; background: #e8f7ef; border: 0; border-radius: 4px; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-event.doing { color: #9a5a13; background: #fff1df; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-event.done { color: #69717d; background: #eef0f3; text-decoration: line-through; }
+.ocs-component[data-component-type="project.dashboard"] .calendar-event.cancelled { color: #8b9099; background: #f2f3f5; text-decoration: line-through; }
+
+@media (max-width: 700px) {
+  .ocs-component[data-component-type="project.dashboard"] .calendar-day { min-height: 74px; padding: 5px; }
+  .ocs-component[data-component-type="project.dashboard"] .calendar-event { padding: 3px 4px; font-size: 10px; }
+  .ocs-component[data-component-type="project.dashboard"] .calendar-toolbar { align-items: flex-start; flex-direction: column; }
+}

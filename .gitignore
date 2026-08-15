@@ -1,7 +1,16 @@
+# Dependencies
 node_modules/
+
+# Build output
 main.js
-*.tsbuildinfo
-.DS_Store
-coverage/
 dist/
 dist-preview/
+coverage/
+
+# Test / debug artifacts
+.playwright-cli/
+src/preview/preview-data.json
+
+# Tooling / OS
+*.tsbuildinfo
+.DS_Store

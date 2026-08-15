@@ -37,6 +37,7 @@ import { timeClockDefinition } from "../widgets/time-clock";
 import { timeCalendarDefinition } from "../widgets/time-calendar";
 import { legacyComponents25Definition } from "../widgets/legacy-components-2-5";
 import { coreNavListDefinition } from "../widgets/core-nav-list";
+import { projectDashboardDefinition } from "../widgets/project-dashboard";
 import { DocumentFileCreatorImpl } from "./create-document";
 import { registerCreateDocumentCommand, registerOpenFileCommand } from "./commands";
 import { ComponentsStudioSettingTab, DEFAULT_SETTINGS, type PluginSettings } from "./settings";
@@ -125,6 +126,7 @@ export class ComponentsStudioPlugin extends Plugin {
       registry.register(timeCalendarDefinition),
       registry.register(legacyComponents25Definition),
       registry.register(coreNavListDefinition),
+      registry.register(projectDashboardDefinition),
     ].find((result) => !result.ok);
     if (registerResult && !registerResult.ok) {
       new Notice(`注册内置组件失败：${registerResult.error.message}`);
