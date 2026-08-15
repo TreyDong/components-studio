@@ -1,0 +1,83 @@
+/**
+ * core.stat-card 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="core.stat-card"]` 之下。
+ * 强调色走 --ocs-stat-accent（props.accent），缺省回退主题 token。
+ */
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--ocs-border, var(--background-modifier-border));
+  border-radius: var(--radius-m, 8px);
+  background: var(--ocs-surface, var(--background-primary));
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ocs-text-muted, var(--text-muted));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-icon {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-value {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--ocs-stat-accent, var(--ocs-text, var(--text-normal)));
+  font-variant-numeric: tabular-nums;
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-unit {
+  margin-left: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ocs-text-muted, var(--text-muted));
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-trend {
+  color: var(--ocs-stat-accent, var(--ocs-success, var(--text-success)));
+}
+
+.ocs-component[data-component-type="core.stat-card"][data-trend="down"] .ocs-stat-card-trend {
+  color: var(--ocs-danger, var(--text-error));
+}
+
+.ocs-component[data-component-type="core.stat-card"][data-trend="flat"] .ocs-stat-card-trend {
+  color: var(--ocs-text-muted, var(--text-muted));
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-trend-label {
+  color: var(--ocs-text-muted, var(--text-muted));
+}
+
+.ocs-component[data-component-type="core.stat-card"] .ocs-stat-card-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ocs-text-muted, var(--text-muted));
+}

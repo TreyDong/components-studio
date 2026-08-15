@@ -37,6 +37,20 @@
   overflow: hidden;
 }
 
+/* 网格子项拉伸填满格子：组件帧 height:100%，面板型组件（卡片/表格）随之铺满。 */
+.ocs-component[data-component-type="core.layout"] .ocs-layout-grid-child {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+.ocs-component[data-component-type="core.layout"] .ocs-layout-grid-child > .ocs-component {
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
 .ocs-component[data-component-type="core.layout"] .ocs-layout-tabs .ocs-layout-tablist {
   display: flex;
   flex-direction: row;

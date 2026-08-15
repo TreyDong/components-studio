@@ -24,6 +24,7 @@ mkdirSync(outdir, { recursive: true });
 copyFileSync("styles.css", `${outdir}/styles.css`);
 copyFileSync("src/preview/dashboard-preview.css", `${outdir}/dashboard-preview.css`);
 copyFileSync("src/preview/project-dashboard.components", `${outdir}/project-dashboard.components`);
+copyFileSync("src/preview/homepage.components", `${outdir}/homepage.components`);
 const html = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>

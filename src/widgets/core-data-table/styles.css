@@ -1,0 +1,76 @@
+/**
+ * core.data-table 样式：作用域限定在宿主渲染帧 `.ocs-component[data-component-type="core.data-table"]` 之下。
+ */
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ocs-text, var(--text-normal));
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid var(--ocs-border, var(--background-modifier-border));
+  border-radius: var(--radius-m, 8px);
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid th,
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid td {
+  padding: 7px 10px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid thead th {
+  position: sticky;
+  top: 0;
+  background: var(--ocs-surface-hover, var(--background-secondary));
+  color: var(--ocs-text-muted, var(--text-muted));
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 1px solid var(--ocs-border, var(--background-modifier-border));
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid tbody tr {
+  border-bottom: 1px solid var(--ocs-border, var(--background-modifier-border));
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-grid.striped tbody tr:nth-child(even) {
+  background: var(--ocs-surface-hover, var(--background-secondary));
+}
+
+.ocs-component[data-component-type="core.data-table"] .ocs-data-table-empty {
+  margin: 0;
+  padding: 14px;
+  text-align: center;
+  color: var(--ocs-text-muted, var(--text-muted));
+  font-size: 13px;
+  border: 1px dashed var(--ocs-border, var(--background-modifier-border));
+  border-radius: var(--radius-m, 8px);
+}

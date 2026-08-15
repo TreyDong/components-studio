@@ -10,6 +10,12 @@ import { createRuntimeServices, HostStateStore } from "../runtime";
 import { RuntimeHostStore } from "../runtime/RuntimeHostStore";
 import { projectDashboardDefinition } from "../widgets/project-dashboard";
 import { coreLayoutDefinition } from "../widgets/core-layout";
+import { coreMarkdownDefinition } from "../widgets/core-markdown";
+import { coreNavListDefinition } from "../widgets/core-nav-list";
+import { coreStatCardDefinition } from "../widgets/core-stat-card";
+import { coreDataTableDefinition } from "../widgets/core-data-table";
+import { timeClockDefinition } from "../widgets/time-clock";
+import { timeCalendarDefinition } from "../widgets/time-calendar";
 import type { PlatformPort, ThemePort, ThemeSnapshot } from "../platform/ports";
 
 const previewTaskFiles = [
@@ -71,12 +77,25 @@ function previewPlatform(): PlatformPort {
 
 async function main(): Promise<void> {
   const registry = new ComponentRegistryImpl();
-  for (const definition of [coreLayoutDefinition, projectDashboardDefinition]) {
+  for (const definition of [
+    coreLayoutDefinition,
+    coreMarkdownDefinition,
+    coreNavListDefinition,
+    coreStatCardDefinition,
+    coreDataTableDefinition,
+    timeClockDefinition,
+    timeCalendarDefinition,
+    projectDashboardDefinition,
+  ]) {
     const registration = registry.register(definition as never);
     if (!registration.ok) throw new Error(registration.error.message);
   }
-  const response = await fetch("./project-dashboard.components");
-  if (!response.ok) throw new Error("无法读取 project-dashboard.components");
+  const docName = new URLSearchParams(location.search).get("doc") ?? "dashboard";
+  const isHomepage = docName === "homepage";
+  const documentFile = isHomepage ? "homepage.components" : "project-dashboard.components";
+  const sourcePath = isHomepage ? "Dashboard/个人工作台.components" : "Dashboard/项目首页.components";
+  const response = await fetch(`./${documentFile}`);
+  if (!response.ok) throw new Error(`无法读取 ${documentFile}`);
   const rawDocument = await response.text();
   const parsed = new DocumentCodec(registry.codecView()).parseUtf8(new TextEncoder().encode(rawDocument));
   if (!parsed.ok) throw new Error(`${parsed.error.code}: ${parsed.error.message}`);
@@ -84,9 +103,9 @@ async function main(): Promise<void> {
   const hostElement = document.getElementById("app");
   if (!hostElement) throw new Error("预览容器 #app 不存在");
   const platform = previewPlatform();
-  const host = new RuntimeHostStore({ hostId: "preview", sourcePath: "Dashboard/项目首页.components", element: hostElement, theme: platform.theme });
+  const host = new RuntimeHostStore({ hostId: "preview", sourcePath, element: hostElement, theme: platform.theme });
   const snapshot = {
-    documentId: dashboardDocument.documentId as never, sourcePath: "Dashboard/项目首页.components", sessionVersion: 1,
+    documentId: dashboardDocument.documentId as never, sourcePath, sessionVersion: 1,
     revision: dashboardDocument.revision, rootId: dashboardDocument.rootId as never,
     nodes: new Map(Object.entries(dashboardDocument.nodes) as [string, unknown][]), dataSources: new Map(),
     permissions: dashboardDocument.permissions, metadata: dashboardDocument.metadata,

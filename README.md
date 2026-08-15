@@ -8,7 +8,7 @@
 
 - **版本化文档**：`ComponentsDocumentV1` 带 `formatVersion` / `revision` / `specVersion`，含 Schema 校验（`src/document/validate.ts`）与迁移框架（各组件 `migrations.ts`）。
 - **可信组件注册表**：组件经 `defineComponent` 注册，声明所需的文档操作权限；运行时由 `CapabilityBroker` 按权限放行。
-- **内置组件**：`core-layout`（布局）、`core-markdown`（Markdown 渲染）、`core-nav-list`（导航列表）、`time-clock`（时钟）、`time-calendar`（日历）、`project-dashboard`（项目看板）。
+- **内置组件**：`core-layout`（布局）、`core-markdown`（Markdown 渲染）、`core-nav-list`（导航列表）、`core-stat-card`（指标卡）、`core-data-table`（数据表格）、`time-clock`（时钟）、`time-calendar`（日历）、`project-dashboard`（项目看板）。
 - **文档动作**：打开文件 / URL、复制到剪贴板、执行命令、显示通知、更新 frontmatter、创建文件。
 - **主题适配**：样式统一走主题 token（`--ocs-*`），非 Obsidian 宿主下自动回退。
 - **数据源**：文档可挂载 `dataSources`，由 `DataSourceStore` 提供查询能力。
