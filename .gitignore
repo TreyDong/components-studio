@@ -1,8 +1,9 @@
 # Dependencies
 node_modules/
 
-# Build output
+# Build output — main.js 等产物应发布到 GitHub Releases，不入库
 main.js
+*.map
 dist/
 dist-preview/
 coverage/
@@ -11,6 +12,12 @@ coverage/
 .playwright-cli/
 src/preview/preview-data.json
 
+# Obsidian runtime data
+data.json
+
 # Tooling / OS
 *.tsbuildinfo
 .DS_Store
+.vscode/
+.idea/
+*.iml
