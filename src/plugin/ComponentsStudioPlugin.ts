@@ -31,13 +31,7 @@ import {
   ComponentsEmbedChild,
 } from "../platform/obsidian/ComponentsEmbedChild";
 import { parseComponentsEmbedOptions } from "../platform/obsidian/embed-options";
-import { coreLayoutDefinition } from "../widgets/core-layout";
-import { coreMarkdownDefinition } from "../widgets/core-markdown";
-import { timeClockDefinition } from "../widgets/time-clock";
-import { timeCalendarDefinition } from "../widgets/time-calendar";
-import { legacyComponents25Definition } from "../widgets/legacy-components-2-5";
-import { coreNavListDefinition } from "../widgets/core-nav-list";
-import { projectDashboardDefinition } from "../widgets/project-dashboard";
+import { BUILTIN_WIDGET_DEFINITIONS } from "../widgets";
 import { DocumentFileCreatorImpl } from "./create-document";
 import { registerCreateDocumentCommand, registerOpenFileCommand } from "./commands";
 import { ComponentsStudioSettingTab, DEFAULT_SETTINGS, type PluginSettings } from "./settings";
@@ -119,15 +113,9 @@ export class ComponentsStudioPlugin extends Plugin {
 
   private assembleRuntime(): void {
     const registry = new ComponentRegistryImpl();
-    const registerResult = [
-      registry.register(coreLayoutDefinition),
-      registry.register(coreMarkdownDefinition),
-      registry.register(timeClockDefinition),
-      registry.register(timeCalendarDefinition),
-      registry.register(legacyComponents25Definition),
-      registry.register(coreNavListDefinition),
-      registry.register(projectDashboardDefinition),
-    ].find((result) => !result.ok);
+    const registerResult = BUILTIN_WIDGET_DEFINITIONS.map((definition) =>
+      registry.register(definition as never),
+    ).find((result) => !result.ok);
     if (registerResult && !registerResult.ok) {
       new Notice(`注册内置组件失败：${registerResult.error.message}`);
     }
