@@ -29,5 +29,5 @@
       "@ocs/contracts/query": ["./src/contracts/query.ts"]
     }
   },
-  "include": ["main.ts", "src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"]
 }

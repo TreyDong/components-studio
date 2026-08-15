@@ -45,7 +45,7 @@ const alias = {
 };
 
 const context = await esbuild.context({
-  entryPoints: ["main.ts"],
+  entryPoints: ["src/plugin/main.ts"],
   bundle: true,
   alias,
   external: [

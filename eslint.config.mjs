@@ -8,7 +8,7 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ["esbuild.config.mjs", "vitest.config.ts", "version-bump.mjs"],
+    files: ["esbuild.config.mjs", "vitest.config.ts", "scripts/*.mjs"],
     languageOptions: {
       globals: { console: "readonly", process: "readonly" },
     },

@@ -47,6 +47,7 @@ src/
   preview/     # 浏览器预览（开发用）
 docs/          # 调研与能力参考文档
 examples/      # 示例文档
+scripts/       # 构建 / 发布脚本（build-preview、version-bump）
 tests/         # 单元 / 集成 / 安装测试
 ```
 
